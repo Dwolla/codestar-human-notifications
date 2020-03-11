@@ -1,0 +1,32 @@
+service: codestar-human-notifications
+
+provider:
+  name: aws
+  runtime: java11
+  memorySize: 1024
+  timeout: 60
+  region: us-west-2
+  deploymentBucket:
+    name: ${opt:bucket}
+    serverSideEncryption: "AES256"
+  cfnRole: "arn:aws:iam::${opt:account}:role/cloudformation/deployer/cloudformation-deployer"
+  logRetentionInDays: 7
+  stackTags:
+    Creator: serverless
+    Environment: ${opt:stage}
+    Project: ${self:service}
+    Team: platform
+    Visibility: internal
+
+package:
+  artifact: target/universal/codestar-human-notifications.zip
+
+functions:
+  notification-listener:
+    handler: com.dwolla.codestar.notifications.LambdaHandler
+    events:
+      - sns: ${opt:codestarSnsTopicArn}
+
+resources:
+  Description: "Listen to CodeStar event notifications, and forward messages in a human-readable way"
+  Resources:

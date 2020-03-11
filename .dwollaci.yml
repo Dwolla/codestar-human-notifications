@@ -1,0 +1,22 @@
+stages:
+  build:
+    nodeLabel: sbt
+    steps:
+      - sbt +universal:packageBin
+    filesToStash:
+      - serverless.yml
+      - .nvmrc
+      - target/scala-2.13/codestar-human-notifications.zip
+  publish:
+    nodeLabel: nvm-deployer
+    steps:
+      - |
+        . ${NVM_DIR}/nvm.sh --no-use
+        nvm install
+        npm install -g npm && npm install -g serverless
+        serverless deploy \
+          --region us-west-2 \
+          --account 455620323323 \
+          --bucket dwolla-code \
+          --stage admin \
+          --codestarSnsTopicArn arn:aws:sns:us-west-2:799546647898:terraform-multi-account-codecommit-notifications
