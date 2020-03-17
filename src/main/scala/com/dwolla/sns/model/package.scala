@@ -8,7 +8,8 @@ import monocle._
 package object model {
   val snsMessage: Traversal[Json, String] = root.Records.each.Sns.Message.as[String]
 
-  private val snsMessageDetail: Optional[Json, Json] = root.detail.notificationBody.json
+  private val snsMessageDetail: Optional[Json, Json] =
+    root.detail.json
 
   private val parseStringAsJson: Prism[String, Json] =
     Prism[String, Json](parser.parse(_).toOption)(Printer.noSpaces.print)
