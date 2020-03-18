@@ -3,7 +3,7 @@ package com.dwolla.codestar.notifications
 import cats.effect._
 import cats.implicits._
 import com.amazonaws.services.lambda.runtime.Context
-import com.dwolla.codestar.notifications.model.Notification
+import com.dwolla.codestar.notifications.model._
 import com.dwolla.lambda._
 import com.dwolla.ses.SesAlg
 import com.dwolla.sns.model._
@@ -22,8 +22,11 @@ class LambdaHandler(printer: Printer) extends IOLambda[Json, Unit](printer) {
                                                                                         (input: Json, context: Context): F[LambdaResponse[Unit]] =
     SesAlg.resource[F].use { ses =>
       for {
-        _ <- messagesInRecordsTraversal[Notification](input).traverse_ { n =>
-          ses.sendEmail(toAddress, fromAddress, n.title.getOrElse("CodeStar Notification"), n.notificationBody)
+        _ <- messagesInRecordsTraversal[CodeStarRecord](input).traverse_ {
+          case Notification(body, title) =>
+            ses.sendEmail(toAddress, fromAddress, title.getOrElse("CodeStar Notification"), body)
+          case UnparsableRecord(json) =>
+            ses.sendEmail(toAddress, fromAddress, "CodeStar Notification", json.spaces2)
         }
       } yield ()
     }
