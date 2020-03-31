@@ -19,4 +19,4 @@ stages:
           --account 455620323323 \
           --bucket dwolla-code \
           --stage admin \
-          --codestarSnsTopicArn arn:aws:sns:us-west-2:799546647898:terraform-multi-account-codecommit-notifications
+          --codestarSnsTopicArn arn:aws:sns:us-west-2:799546647898:codecommit-notifications

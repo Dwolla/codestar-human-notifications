@@ -17,5 +17,5 @@ serverless deploy \
           --account 006467937747 \
           --bucket dwolla-code-sandbox \
           --stage sandbox \
-          --codestarSnsTopicArn arn:aws:sns:us-west-2:799546647898:terraform-multi-account-codecommit-notifications
+          --codestarSnsTopicArn arn:aws:sns:us-west-2:799546647898:codecommit-notifications
 ```
