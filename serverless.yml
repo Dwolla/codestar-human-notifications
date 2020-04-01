@@ -11,6 +11,11 @@ provider:
     serverSideEncryption: "AES256"
   cfnRole: "arn:aws:iam::${opt:account}:role/cloudformation/deployer/cloudformation-deployer"
   logRetentionInDays: 7
+  iamRoleStatements:
+    - Effect: Allow
+      Action: ses:SendEmail
+      Resource:
+        - "*"
   stackTags:
     Creator: serverless
     Environment: ${opt:stage}
@@ -26,7 +31,18 @@ functions:
     handler: com.dwolla.codestar.notifications.LambdaHandler
     events:
       - sns: ${opt:codestarSnsTopicArn}
+    environment:
+      SENDER_ADDRESS: ${self:custom.senderAddress.${self:provider.stage}}
+      RECIPIENT_ADDRESS: ${self:custom.recipientAddress.${self:provider.stage}}
 
 resources:
   Description: "Listen to CodeStar event notifications, and forward messages in a human-readable way"
   Resources:
+
+custom:
+  senderAddress:
+    sandbox: "dev-testing@us-west-2.sandbox.dwolla.net"
+    admin: "noreply@dwolla.com"
+  recipientAddress:
+    sandbox: "dev-testing@dwolla.com"
+    admin: "devops@dwolla.com"

@@ -10,3 +10,12 @@ serverless deploy \
   --codestarSnsTopicArn arn:aws:sns:us-west-2:$(aws sts get-caller-identity | jq -r .Account):codecommit-notifications
   --stage sandbox
 ```
+
+```
+serverless deploy \
+          --region us-west-2 \
+          --account 006467937747 \
+          --bucket dwolla-code-sandbox \
+          --stage sandbox \
+          --codestarSnsTopicArn arn:aws:sns:us-west-2:799546647898:codecommit-notifications
+```
