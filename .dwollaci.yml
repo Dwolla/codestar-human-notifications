@@ -6,7 +6,7 @@ stages:
     filesToStash:
       - serverless.yml
       - .nvmrc
-      - target/scala-2.13/codestar-human-notifications.zip
+      - target/universal/codestar-human-notifications.zip
   publish:
     nodeLabel: nvm-deployer
     steps:
