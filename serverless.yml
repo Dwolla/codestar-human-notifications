@@ -32,8 +32,8 @@ functions:
     events:
       - sns: ${opt:codestarSnsTopicArn}
     environment:
-      SENDER_ADDRESS: ${self:custom.senderAddress.${self:provider.stage}}
-      RECIPIENT_ADDRESS: ${self:custom.recipientAddress.${self:provider.stage}}
+      SENDER_ADDRESS: ${self:custom.senderAddress.${opt:stage}}
+      RECIPIENT_ADDRESS: ${self:custom.recipientAddress.${opt:stage}}
 
 resources:
   Description: "Listen to CodeStar event notifications, and forward messages in a human-readable way"
