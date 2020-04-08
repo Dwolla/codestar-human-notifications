@@ -26,7 +26,7 @@ class Handler[F[_]](ses: SesAlg[F]) {
            (implicit E: Environment[F], F: Monad[F]): F[LambdaResponse[Unit]] =
     for {
       senderAddress <- Environment[F].get("SENDER_ADDRESS", "dev-testing@us-west-2.sandbox.dwolla.net")
-      recipientAddress <- Environment[F].get("SENDER_ADDRESS", "dev-testing@dwolla.com")
+      recipientAddress <- Environment[F].get("RECIPIENT_ADDRESS", "dev-testing@dwolla.com")
       _ <- messagesInRecordsTraversal[CodeStarRecord](input).traverse_ {
         case Notification(body, title) =>
           ses.sendEmail(recipientAddress, senderAddress, title.getOrElse("CodeStar Notification"), body)
