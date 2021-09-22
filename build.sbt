@@ -4,7 +4,7 @@ lazy val buildSettings = Seq(
   homepage := Some(url("https://github.com/Dwolla/codecommit-human-notifications")),
   licenses += ("MIT", url("http://opensource.org/licenses/MIT")),
   startYear := Option(2020),
-  addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.11.0" cross CrossVersion.full),
+  addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.11.3" cross CrossVersion.full),
   addCompilerPlugin("com.olegpy" %% "better-monadic-for" % "0.3.1"),
   resolvers ++= Seq(
     Resolver.bintrayRepo("dwolla", "maven"),
