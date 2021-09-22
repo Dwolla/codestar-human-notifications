@@ -32,7 +32,7 @@ lazy val `codestar-human-notifications` = (project in file("."))
         "io.chrisdavenport" %% "log4cats-slf4j" % "1.0.1",
         "com.dwolla" %% "testutils-scalatest-fs2" % "2.0.0-M4" % Test,
         "com.ironcorelabs" %% "cats-scalatest" % "3.0.5" % Test,
-        "org.scalatest" %% "scalatest" % "3.1.0" % Test,
+        "org.scalatest" %% "scalatest" % "3.1.4" % Test,
         "org.scalatestplus" %% "scalacheck-1-14" % "3.1.1.1" % Test,
       )
     },
