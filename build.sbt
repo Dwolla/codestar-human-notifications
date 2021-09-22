@@ -21,7 +21,7 @@ lazy val `codestar-human-notifications` = (project in file("."))
   .settings(
     description := "Listen to CodeStar event notifications, and forward messages in a human-readable way",
     libraryDependencies ++= {
-      val fs2AwsVersion = "2.0.0-M9"
+      val fs2AwsVersion = "2.0.0-M12"
       Seq(
         "software.amazon.awssdk" % "ses" % "2.10.84",
         "org.typelevel" %% "cats-core" % "2.1.1",
