@@ -24,7 +24,7 @@ lazy val `codestar-human-notifications` = (project in file("."))
       val fs2AwsVersion = "2.0.0-M9"
       Seq(
         "software.amazon.awssdk" % "ses" % "2.10.84",
-        "org.typelevel" %% "cats-core" % "2.1.1",
+        "org.typelevel" %% "cats-core" % "2.7.0",
         "org.typelevel" %% "cats-effect" % "2.1.2",
         "io.circe" %% "circe-optics" % "0.13.0",
         "com.dwolla" %% "fs2-aws-java-sdk2" % fs2AwsVersion,
